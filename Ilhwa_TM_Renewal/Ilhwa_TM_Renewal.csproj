@@ -1,0 +1,312 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{2AECE008-E32B-4B44-A969-A6FBF06FA71B}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Artn.Ilhwa</RootNamespace>
+    <AssemblyName>Ilhwa_TM_Renewal</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SourceAnalysisOverrideSettingsFile>C:\Users\TheSON\AppData\Roaming\ICSharpCode/SharpDevelop4\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
+    <RunSourceAnalysis>False</RunSourceAnalysis>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>..\bin\</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE;TEST</DefineConstants>
+    <StartAction>Project</StartAction>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\AbsViewController.cs" />
+    <Compile Include="Controller\Barcode\BarcodeController.cs" />
+    <Compile Include="Controller\Barcode\BarcodePrinter.cs" />
+    <Compile Include="Controller\Barcode\BarcodeSerialPort.cs" />
+    <Compile Include="Controller\Barcode\TemplateBarcodePrinter.cs" />
+    <Compile Include="Controller\DataViewBinder.cs" />
+    <Compile Include="Controller\DataViewController.cs" />
+    <Compile Include="Controller\LogController.cs" />
+    <Compile Include="Controller\RemainingController.cs" />
+    <Compile Include="Controller\TaskOrderController.cs" />
+    <Compile Include="Controller\TaskProcessController.cs" />
+    <Compile Include="Controller\TaskRegistController.cs" />
+    <Compile Include="MainForm.cs" />
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AbsDataViewManageable.cs" />
+    <Compile Include="Model\AbsMatchTableRecordData.cs" />
+    <Compile Include="Model\AbsSubRecordData.cs" />
+    <Compile Include="Model\Badness.cs" />
+    <Compile Include="Model\BarcodeInfo.cs" />
+    <Compile Include="Model\Enums.cs" />
+    <Compile Include="Model\MaterialProdInfo.cs" />
+    <Compile Include="Model\MaterialSkelpInfo.cs" />
+    <Compile Include="Model\TaskOrder.cs" />
+    <Compile Include="Model\TaskProcess.cs" />
+    <Compile Include="Model\TempProd.cs" />
+    <Compile Include="Model\TreeRecordable.cs" />
+    <Compile Include="Model\Waste.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Theson\Common\Event.cs" />
+    <Compile Include="Theson\Common\Interfaces.cs" />
+    <Compile Include="Theson\DBManager\AbsAccessibleDB.cs" />
+    <Compile Include="Theson\DBManager\AbsDBManager.cs" />
+    <Compile Include="Theson\DBManager\AbsDBServer.cs" />
+    <Compile Include="Theson\DBManager\AbsEmbededDB.cs" />
+    <Compile Include="Theson\DBManager\MsSqlDBManager.cs" />
+    <Compile Include="Theson\DBManager\XmlQueryReader.cs" />
+    <Compile Include="Theson\Lib\LiAsExcelDB.cs" />
+    <Compile Include="Theson\Util\Config\AbsConfigTable.cs" />
+    <Compile Include="Theson\Util\Config\Config_intf.cs" />
+    <Compile Include="Theson\Util\Config\ExcelConfigTable.cs" />
+    <Compile Include="Theson\Util\Config\IniConfigTable.cs" />
+    <Compile Include="Theson\Util\Config\RegistryConfigTable.cs" />
+    <Compile Include="Theson\Util\Config\TextConfigTable.cs" />
+    <Compile Include="Theson\Util\Intf.cs" />
+    <Compile Include="Theson\Util\MultiTypeArgs.cs" />
+    <Compile Include="Theson\Util\TextLogger.cs" />
+    <Compile Include="Theson\Util\Util.cs" />
+    <Compile Include="View\Common\DataViewUserControl.cs" />
+    <Compile Include="View\Common\Event_Interface.cs" />
+    <Compile Include="View\Common\DataViewForm.cs" />
+    <Compile Include="View\Dialog\FormBarcodeList.cs" />
+    <Compile Include="View\Dialog\FormBarcodeList.Designer.cs">
+      <DependentUpon>FormBarcodeList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormBarcodePrinter.cs" />
+    <Compile Include="View\Dialog\FormBarcodePrinter.Designer.cs">
+      <DependentUpon>FormBarcodePrinter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormChainInputList.cs" />
+    <Compile Include="View\Dialog\FormChainInputList.Designer.cs">
+      <DependentUpon>FormChainInputList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormConfig.cs" />
+    <Compile Include="View\Dialog\FormConfig.Designer.cs">
+      <DependentUpon>FormConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormEquipChange.cs" />
+    <Compile Include="View\Dialog\FormEquipChange.Designer.cs">
+      <DependentUpon>FormEquipChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormGridSelector.cs" />
+    <Compile Include="View\Dialog\FormGridSelector.Designer.cs">
+      <DependentUpon>FormGridSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormNumberPad.cs" />
+    <Compile Include="View\Dialog\FormNumberPad.Designer.cs">
+      <DependentUpon>FormNumberPad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormProgressBar.cs" />
+    <Compile Include="View\Dialog\FormProgressBar.Designer.cs">
+      <DependentUpon>FormProgressBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormSearchOption.cs" />
+    <Compile Include="View\Dialog\FormSearchOption.Designer.cs">
+      <DependentUpon>FormSearchOption.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\GridSelectorView.cs" />
+    <Compile Include="View\Dialog\GridSelectorView.Designer.cs">
+      <DependentUpon>GridSelectorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\MsgBox.cs" />
+    <Compile Include="View\Dialog\MsgBox.Designer.cs">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormTaskOrderList.cs" />
+    <Compile Include="View\FormTaskOrderList.Designer.cs">
+      <DependentUpon>FormTaskOrderList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormTaskRegist.cs" />
+    <Compile Include="View\FormTaskRegist.Designer.cs">
+      <DependentUpon>FormTaskRegist.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskOrderView.cs" />
+    <Compile Include="View\TaskOrderView.Designer.cs">
+      <DependentUpon>TaskOrderView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskOrderViewList.cs" />
+    <Compile Include="View\TaskOrderViewList.Designer.cs">
+      <DependentUpon>TaskOrderViewList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\FormTaskProcessList.cs" />
+    <Compile Include="View\FormTaskProcessList.Designer.cs">
+      <DependentUpon>FormTaskProcessList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskProcessViewList.cs" />
+    <Compile Include="View\TaskProcessViewList.Designer.cs">
+      <DependentUpon>TaskProcessViewList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskProcessView.cs" />
+    <Compile Include="View\TaskProcessView.Designer.cs">
+      <DependentUpon>TaskProcessView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskRegistPart\BarcodePrinterViewPart.cs" />
+    <Compile Include="View\TaskRegistPart\BarcodePrinterViewPart.Designer.cs">
+      <DependentUpon>BarcodePrinterViewPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskRegistPart\TaskMaterialsViewPart.cs" />
+    <Compile Include="View\TaskRegistPart\TaskMaterialsViewPart.Designer.cs">
+      <DependentUpon>TaskMaterialsViewPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskRegistPart\InputStatusListViewPart.cs" />
+    <Compile Include="View\TaskRegistPart\InputStatusListViewPart.Designer.cs">
+      <DependentUpon>InputStatusListViewPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskRegistPart\TaskOrderViewPart.cs" />
+    <Compile Include="View\TaskRegistPart\TaskOrderViewPart.Designer.cs">
+      <DependentUpon>TaskOrderViewPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskRegistPart\FindMaterialsViewPart.cs" />
+    <Compile Include="View\TaskRegistPart\FindMaterialsViewPart.Designer.cs">
+      <DependentUpon>FindMaterialsViewPart.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\TaskRegistPart\TaskProcessViewPart.cs" />
+    <Compile Include="View\TaskRegistPart\TaskProcessViewPart.Designer.cs">
+      <DependentUpon>TaskProcessViewPart.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common" />
+    <Folder Include="Controller" />
+    <Folder Include="Controller\Barcode" />
+    <Folder Include="Model" />
+    <Folder Include="Theson" />
+    <Folder Include="Theson\DBManager" />
+    <Folder Include="Theson\Common" />
+    <Folder Include="Theson\Lib" />
+    <Folder Include="Theson\Util" />
+    <Folder Include="Theson\Util\Config" />
+    <Folder Include="View" />
+    <Folder Include="View\Common" />
+    <Folder Include="View\Dialog" />
+    <Folder Include="View\TaskRegistPart" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormBarcodeList.resx">
+      <DependentUpon>FormBarcodeList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormBarcodePrinter.resx">
+      <DependentUpon>FormBarcodePrinter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormChainInputList.resx">
+      <DependentUpon>FormChainInputList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormConfig.resx">
+      <DependentUpon>FormConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormEquipChange.resx">
+      <DependentUpon>FormEquipChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormGridSelector.resx">
+      <DependentUpon>FormGridSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormNumberPad.resx">
+      <DependentUpon>FormNumberPad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormProgressBar.resx">
+      <DependentUpon>FormProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormSearchOption.resx">
+      <DependentUpon>FormSearchOption.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\GridSelectorView.resx">
+      <DependentUpon>GridSelectorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\MsgBox.resx">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormTaskOrderList.resx">
+      <DependentUpon>FormTaskOrderList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormTaskRegist.resx">
+      <DependentUpon>FormTaskRegist.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TaskOrderView.resx">
+      <DependentUpon>TaskOrderView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\FormTaskProcessList.resx">
+      <DependentUpon>FormTaskProcessList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TaskOrderViewList.resx">
+      <DependentUpon>TaskOrderViewList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TaskProcessViewList.resx">
+      <DependentUpon>TaskProcessViewList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TaskProcessView.resx">
+      <DependentUpon>TaskProcessView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TaskRegistPart\BarcodePrinterViewPart.resx">
+      <DependentUpon>BarcodePrinterViewPart.Designer.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TaskRegistPart\FindMaterialsViewPart.resx">
+      <DependentUpon>FindMaterialsViewPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TaskRegistPart\TaskMaterialsViewPart.resx">
+      <DependentUpon>TaskMaterialsViewPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TaskRegistPart\InputStatusListViewPart.resx">
+      <DependentUpon>InputStatusListViewPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TaskRegistPart\TaskOrderViewPart.resx">
+      <DependentUpon>TaskOrderViewPart.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\TaskRegistPart\TaskProcessViewPart.resx">
+      <DependentUpon>TaskProcessViewPart.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+</Project>

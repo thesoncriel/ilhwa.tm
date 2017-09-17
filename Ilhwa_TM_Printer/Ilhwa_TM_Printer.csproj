@@ -1,0 +1,258 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="3.5" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build">
+  <PropertyGroup>
+    <ProjectGuid>{D7B35677-6446-4707-A0F5-412CDD801496}</ProjectGuid>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>Artn.Ilhwa</RootNamespace>
+    <AssemblyName>Ilhwa_TM_Printer</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <SourceAnalysisOverrideSettingsFile>C:\Users\JHSON\AppData\Roaming\ICSharpCode/SharpDevelop4\Settings.SourceAnalysis</SourceAnalysisOverrideSettingsFile>
+    <SignAssembly>False</SignAssembly>
+    <DelaySign>False</DelaySign>
+    <RunPostBuildEvent>OnBuildSuccess</RunPostBuildEvent>
+    <AllowUnsafeBlocks>False</AllowUnsafeBlocks>
+    <NoStdLib>False</NoStdLib>
+    <WarningLevel>4</WarningLevel>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <RunCodeAnalysis>False</RunCodeAnalysis>
+    <RunSourceAnalysis>False</RunSourceAnalysis>
+    <OutputPath>..\bin</OutputPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Platform)' == 'x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <RegisterForComInterop>False</RegisterForComInterop>
+    <GenerateSerializationAssemblies>Auto</GenerateSerializationAssemblies>
+    <BaseAddress>4194304</BaseAddress>
+    <FileAlignment>4096</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
+    <OutputPath>..\bin</OutputPath>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>Full</DebugType>
+    <Optimize>False</Optimize>
+    <CheckForOverflowUnderflow>True</CheckForOverflowUnderflow>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <StartAction>Project</StartAction>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
+    <OutputPath>bin\Release\</OutputPath>
+    <DebugSymbols>False</DebugSymbols>
+    <DebugType>None</DebugType>
+    <Optimize>True</Optimize>
+    <CheckForOverflowUnderflow>False</CheckForOverflowUnderflow>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controller\AbsViewController.cs" />
+    <Compile Include="Controller\Barcode\BarcodeController.cs" />
+    <Compile Include="Controller\Barcode\BarcodePrinter.cs" />
+    <Compile Include="Controller\Barcode\BarcodeSerialPort.cs" />
+    <Compile Include="Controller\DataViewBinder.cs" />
+    <Compile Include="Controller\DataViewController.cs" />
+    <Compile Include="Controller\RemainingController.cs" />
+    <Compile Include="Controller\TaskCurrentController.cs" />
+    <Compile Include="Controller\TaskOrderController.cs" />
+    <Compile Include="Controller\TaskOrderPopController.cs" />
+    <Compile Include="Controller\TaskProcessController.cs" />
+    <Compile Include="Controller\TaskRegistController.cs" />
+    <Compile Include="MainForm.cs" />
+    <Compile Include="MainForm.Designer.cs">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Model\AbsDataViewManageable.cs" />
+    <Compile Include="Model\AbsMatchTableRecordData.cs" />
+    <Compile Include="Model\AbsSubRecordData.cs" />
+    <Compile Include="Model\Badness.cs" />
+    <Compile Include="Model\BarcodeInfo.cs" />
+    <Compile Include="Model\Enums.cs" />
+    <Compile Include="Model\MaterialProdInfo.cs" />
+    <Compile Include="Model\MaterialSkelpInfo.cs" />
+    <Compile Include="Model\TaskCurrent.cs" />
+    <Compile Include="Model\TaskOrder.cs" />
+    <Compile Include="Model\TaskProcess.cs" />
+    <Compile Include="Model\TaskProcessList.cs" />
+    <Compile Include="Model\TempProd.cs" />
+    <Compile Include="Model\TreeRecordable.cs" />
+    <Compile Include="Model\Waste.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Theson\Common\Event.cs" />
+    <Compile Include="Theson\Common\Interfaces.cs" />
+    <Compile Include="Theson\DBManager\AbsAccessibleDB.cs" />
+    <Compile Include="Theson\DBManager\AbsDBManager.cs" />
+    <Compile Include="Theson\DBManager\AbsDBServer.cs" />
+    <Compile Include="Theson\DBManager\AbsEmbededDB.cs" />
+    <Compile Include="Theson\DBManager\MsSqlDBManager.cs" />
+    <Compile Include="Theson\DBManager\XmlQueryReader.cs" />
+    <Compile Include="Theson\Lib\LiAsExcelDB.cs" />
+    <Compile Include="Theson\Util\Config\AbsConfigTable.cs" />
+    <Compile Include="Theson\Util\Config\Config_intf.cs" />
+    <Compile Include="Theson\Util\Config\ExcelConfigTable.cs" />
+    <Compile Include="Theson\Util\Config\IniConfigTable.cs" />
+    <Compile Include="Theson\Util\Config\RegistryConfigTable.cs" />
+    <Compile Include="Theson\Util\Config\TextConfigTable.cs" />
+    <Compile Include="Theson\Util\Intf.cs" />
+    <Compile Include="Theson\Util\MultiTypeArgs.cs" />
+    <Compile Include="Theson\Util\TextLogger.cs" />
+    <Compile Include="View\Common\DataViewForm.cs" />
+    <Compile Include="View\Common\DataViewUserControl.cs" />
+    <Compile Include="View\Common\Event_Interface.cs" />
+    <Compile Include="View\Dialog\FormBarcodePrinter.cs" />
+    <Compile Include="View\Dialog\FormBarcodePrinter.Designer.cs">
+      <DependentUpon>FormBarcodePrinter.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormConfig.cs" />
+    <Compile Include="View\Dialog\FormConfig.Designer.cs">
+      <DependentUpon>FormConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormEquipChange.cs" />
+    <Compile Include="View\Dialog\FormEquipChange.Designer.cs">
+      <DependentUpon>FormEquipChange.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormGridSelector.cs" />
+    <Compile Include="View\Dialog\FormGridSelector.Designer.cs">
+      <DependentUpon>FormGridSelector.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormNumberPad.cs" />
+    <Compile Include="View\Dialog\FormNumberPad.Designer.cs">
+      <DependentUpon>FormNumberPad.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\FormProgressBar.cs" />
+    <Compile Include="View\Dialog\FormProgressBar.Designer.cs">
+      <DependentUpon>FormProgressBar.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\GridSelectorView.cs" />
+    <Compile Include="View\Dialog\GridSelectorView.Designer.cs">
+      <DependentUpon>GridSelectorView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\Dialog\MsgBox.cs" />
+    <Compile Include="View\Dialog\MsgBox.Designer.cs">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\POP\FormTaskCurrentList.cs" />
+    <Compile Include="View\POP\FormTaskCurrentList.Designer.cs">
+      <DependentUpon>FormTaskCurrentList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\POP\FormTaskOrderList.cs" />
+    <Compile Include="View\POP\FormTaskOrderList.Designer.cs">
+      <DependentUpon>FormTaskOrderList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\POP\TaskCurrentSearchView.cs" />
+    <Compile Include="View\POP\TaskCurrentSearchView.Designer.cs">
+      <DependentUpon>TaskCurrentSearchView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\POP\TaskCurrentView.cs" />
+    <Compile Include="View\POP\TaskCurrentView.Designer.cs">
+      <DependentUpon>TaskCurrentView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\POP\TaskCurrentViewList.cs" />
+    <Compile Include="View\POP\TaskCurrentViewList.Designer.cs">
+      <DependentUpon>TaskCurrentViewList.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\POP\TaskOrderSearchView.cs" />
+    <Compile Include="View\POP\TaskOrderSearchView.Designer.cs">
+      <DependentUpon>TaskOrderSearchView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\POP\TaskOrderView.cs" />
+    <Compile Include="View\POP\TaskOrderView.Designer.cs">
+      <DependentUpon>TaskOrderView.cs</DependentUpon>
+    </Compile>
+    <Compile Include="View\POP\TaskOrderViewList.cs" />
+    <Compile Include="View\POP\TaskOrderViewList.Designer.cs">
+      <DependentUpon>TaskOrderViewList.cs</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controller" />
+    <Folder Include="Controller\Barcode" />
+    <Folder Include="Controller\POP" />
+    <Folder Include="Model" />
+    <Folder Include="Theson" />
+    <Folder Include="Theson\Common" />
+    <Folder Include="Theson\DBManager" />
+    <Folder Include="Theson\Lib" />
+    <Folder Include="Theson\Util" />
+    <Folder Include="Theson\Util\Config" />
+    <Folder Include="View" />
+    <Folder Include="View\Common" />
+    <Folder Include="View\Dialog" />
+    <Folder Include="View\POP" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="MainForm.resx">
+      <DependentUpon>MainForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormBarcodePrinter.resx">
+      <DependentUpon>FormBarcodePrinter.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormConfig.resx">
+      <DependentUpon>FormConfig.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormEquipChange.resx">
+      <DependentUpon>FormEquipChange.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormGridSelector.resx">
+      <DependentUpon>FormGridSelector.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormNumberPad.resx">
+      <DependentUpon>FormNumberPad.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\FormProgressBar.resx">
+      <DependentUpon>FormProgressBar.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\GridSelectorView.resx">
+      <DependentUpon>GridSelectorView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\Dialog\MsgBox.resx">
+      <DependentUpon>MsgBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\POP\FormTaskCurrentList.resx">
+      <DependentUpon>FormTaskCurrentList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\POP\FormTaskOrderList.resx">
+      <DependentUpon>FormTaskOrderList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\POP\TaskCurrentSearchView.resx">
+      <DependentUpon>TaskCurrentSearchView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\POP\TaskCurrentView.resx">
+      <DependentUpon>TaskCurrentView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\POP\TaskCurrentViewList.resx">
+      <DependentUpon>TaskCurrentViewList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\POP\TaskOrderSearchView.resx">
+      <DependentUpon>TaskOrderSearchView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\POP\TaskOrderView.resx">
+      <DependentUpon>TaskOrderView.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="View\POP\TaskOrderViewList.resx">
+      <DependentUpon>TaskOrderViewList.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.Targets" />
+</Project>

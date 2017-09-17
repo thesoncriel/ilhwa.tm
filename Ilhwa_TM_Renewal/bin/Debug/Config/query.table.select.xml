@@ -1,0 +1,1501 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<queries>
+  <dbtype name="mssql" product="ilhwa_tm">  
+	  <query content="procedure_insert TM_BC_INSERT_Etc_Prod_Enter">TM_BC_INSERT_Etc_Prod_Enter</query>
+	  <query content="procedure_insert TM_BC_INSERT_Etc_Prod_Enter desc">
+		<![CDATA[
+		/* 기타 발행 */
+/*
+			 @p_Enter_Date		datetime			--	입고일자													
+			,@p_Enter_Div		nchar(1)			--	입고구분(정상:A,구입:P,기타:E)													
+			,@p_Cust_Code		nchar(10)			--	거래처													
+			,@p_Prod_Barcode	nchar(24)			--	제품바코드													
+			,@p_PO_No			nchar(8)			--	생산지시번호													
+			,@p_PO_Seq			nchar(3)			--	생산지시행번													
+			,@p_Use_Mat_Barcode	nchar(22)			--	투입 스켈프													
+			,@p_Use_Mat_Seq		nchar(2)			--	투입 스켈프 순번													
+			,@p_Mat_Code		nvarchar(10)		--	제품코드 (SPEC)													
+			,@p_Mat_Quality		nvarchar(2)			--	강종													
+			,@p_OD_Name			nvarchar(15)		--	외경 (문자)													
+			,@p_OD_Value		decimal(18,1)		--	외경 (숫자)													
+			,@p_LEN				decimal(18,1)		--	길이													
+			,@p_THK				decimal(18,1)		--	두께													
+			,@p_Enter_Qty		decimal(18,0)		--	입고수량													
+			,@p_Enter_WGT		decimal(18,1)		--	입고중량													
+			,@p_Prod_Status		nchar(1)			--	제품상태 (양품-N, 불량품-B)													
+			,@p_Fac_Code		nchar(3)			--	창고
+			,@p_Eq_Code			nchar(4)			--	설비코드									
+			,@p_Maker			nvarchar(10)		--	작성자													
+			,@p_MakeDate		datetime			--	작성일													
+			,@p_Editor			nvarchar(10)		--	수정자													
+			,@p_EditDate		datetime			--	수정일	
+			,@p_OutPut1			nchar(24)	OUTPUT	--	제품바코드	
+			,@p_OutPut2			nvarchar(30)OUTPUT	--	제품바코드	
+*/ 						
+		]]>
+	  </query>
+
+	  <query content="procedure_insert TM_BC_INSERT_Prod_Enter">TM_BC_INSERT_Prod_Enter</query>
+	  <query content="procedure_insert TM_BC_INSERT_Prod_Enter desc">
+	  	/* 제품 실입고 프로시저 */
+			 @p_Enter_Date		datetime			--	입고일자													
+			,@p_Enter_Div		nchar(1)			--	입고구분(정상:A,구입:P,기타:E)													
+			,@p_Cust_Code		nchar(10)			--	거래처													
+			,@p_Prod_Barcode	nchar(24)			--	제품바코드													
+			,@p_PO_No			nchar(8)			--	생산지시번호													
+			,@p_PO_Seq			nchar(3)			--	생산지시행번		
+			,@P_Prod_Seq		nchar(2)			--	생산순번											
+			,@p_Use_Mat_Barcode	nchar(22)			--	투입 스켈프													
+			,@p_Use_Mat_Seq		nchar(2)			--	투입 스켈프 순번													
+			,@p_Mat_Code		nvarchar(10)		--	제품코드 (SPEC)													
+			,@p_Mat_Quality		nvarchar(2)			--	강종													
+			,@p_OD_Name			nvarchar(15)		--	외경 (문자)													
+			,@p_OD_Value		decimal(18,1)		--	외경 (숫자)													
+			,@p_LEN				decimal(18,1)		--	길이													
+			,@p_THK				decimal(18,1)		--	두께													
+			,@p_Enter_Qty		decimal(18,0)		--	입고수량													
+			,@p_Enter_WGT		decimal(18,1)		--	입고중량													
+			,@p_Prod_Status		nchar(1)			--	제품상태 (양품-N, 불량품-B)													
+			,@p_Fac_Code		nchar(3)			--	창고
+			,@p_Eq_Code			nchar(4)			--	설비코드	
+			,@p_Proc_Code		nchar(2)			--	처리공정
+			,@p_Stock_Status	nchar(1)			--	주문(O)/재고(S)	
+			,@p_Status			nchar(1)			--	진행상태(A,I,W,E)												
+			,@p_Maker			nvarchar(10)		--	작성자													
+			,@p_MakeDate		datetime			--	작성일													
+			,@p_Editor			nvarchar(10)		--	수정자													
+			,@p_EditDate		datetime			--	수정일	
+			,@p_OutPut1			nchar(24)	OUTPUT	--	제품바코드	
+			,@p_OutPut2			nvarchar(30)OUTPUT	--	제품바코드	
+	</query>
+	  
+	  <query content="procedure_insert TM_BC_INSERT_Prod_Enter_TEMP">TM_BC_INSERT_Prod_Enter_TEMP</query>	
+	  <query content="procedure_insert TM_BC_INSERT_Prod_Enter_TEMP desc">
+	  	/* 제품 가입고 프로시저. 수행 후 Output1로 바코드를 받아와서 다시 실입고나 투입 현황쪽에 추가 시켜 줘야 한다 */
+			 @p_Enter_Date		datetime			--	입고일자													
+			,@p_Enter_Div		nchar(1)			--	입고구분(정상:A,구입:P,기타:E)													
+			,@p_Cust_Code		nchar(10)			--	거래처													
+			,@p_Prod_Barcode	nchar(24)			--	제품바코드													
+			,@p_PO_No			nchar(8)			--	생산지시번호													
+			,@p_PO_Seq			nchar(3)			--	생산지시행번		
+			,@P_Prod_Seq		nchar(2)			--	생산순번											
+			,@p_Use_Mat_Barcode	nchar(22)			--	투입 스켈프													
+			,@p_Use_Mat_Seq		nchar(2)			--	투입 스켈프 순번													
+			,@p_Mat_Code		nvarchar(10)		--	제품코드 (SPEC)													
+			,@p_Mat_Quality		nvarchar(2)			--	강종													
+			,@p_OD_Name			nvarchar(15)		--	외경 (문자)													
+			,@p_OD_Value		decimal(18,1)		--	외경 (숫자)													
+			,@p_LEN				decimal(18,1)		--	길이													
+			,@p_THK				decimal(18,1)		--	두께													
+			,@p_Enter_Qty		decimal(18,0)		--	입고수량													
+			,@p_Enter_WGT		decimal(18,1)		--	입고중량													
+			,@p_Prod_Status		nchar(1)			--	제품상태 (양품-N, 불량품-B)													
+			,@p_Fac_Code		nchar(3)			--	창고
+			,@p_Eq_Code			nchar(4)			--	설비코드	
+			,@p_Proc_Code		nchar(2)			--	처리공정
+			,@p_Stock_Status	nchar(1)			--	주문(O)/재고(S)	
+			,@p_Status			nchar(1)			--	진행상태(A,I,W,E)												
+			,@p_Maker			nvarchar(10)		--	작성자													
+			,@p_MakeDate		datetime			--	작성일													
+			,@p_Editor			nvarchar(10)		--	수정자													
+			,@p_EditDate		datetime			--	수정일	
+			,@p_OutPut1			nchar(24)	OUTPUT	--	제품바코드	
+			,@p_OutPut2			nvarchar(30)OUTPUT	--	제품바코드	
+	</query>	  
+	  <query content="procedure_insert TM_BC_INSERT_Prod_Enter_TEMP1">TM_BC_INSERT_Prod_Enter_TEMP</query>	  
+	  <query content="procedure_insert TM_BC_INSERT_Prod_Enter_TEMP2">TM_BC_INSERT_Prod_Enter_TEMP</query>
+	<query content="procedure_insert TM_P1_INSERT_BADNESS">TM_P1_INSERT_BADNESS</query>
+	<query content="procedure_insert TM_P1_INSERT_BADNESS desc">
+		<![CDATA[
+		/* 불량 등록 1차 */
+/*
+			@p_PO_No			nchar(8),		-- 작업지시번호
+			@p_Proc_Code		nchar(2),		-- 공정
+			@p_Bad_Code			nchar(6),		-- 폐철사유
+			@p_Prod_Barcode		nchar(24),		-- 스켈프번호
+			@p_Prod_Barcode2	nchar(24),		-- 스켈프번호
+			@p_Prod_Code		nvarchar(10),	-- 스켈프번호
+			@p_Quality			nchar(2),	-- 스켈프번호
+			@p_OD_Value			decimal(18,2),
+			@p_THK				decimal(18,1),
+			@p_LEN				decimal(18,0),
+			@p_Qty				decimal(18,0),
+			@p_Maker			nvarchar(10),	--
+			@p_MakeDate			datetime,		--
+			@p_Editor			nvarchar(10),	--
+			@p_EditDate			datetime		--
+*/							
+		]]>
+	  </query>
+	<query content="procedure_insert TM_P1_INSERT_MAT_USE">TM_P1_INSERT_MAT_USE</query>
+	<query content="procedure_insert TM_P1_INSERT_MAT_USE desc">
+		<![CDATA[
+		/* 잔량 등록 1차 */
+/*
+ @p_PO_No			nchar(8)			--	생산지시번호													
+,@p_PO_Seq			nchar(3)			--	생산지시행번	
+,@p_Use_Mat_No		nchar(2)			
+,@p_EqCode			nchar(4)
+,@p_Mat_Barcode		nchar(22)			--	투입 스켈프													
+,@p_All_Use_Flag	nchar(1)
+,@p_InputWGT		decimal(18,1)
+,@p_UsableWGT		decimal(18,1)
+,@p_UseWGT			decimal(18,1)
+,@P_Prod_Seq		nchar(3)			--	생산순번				
+,@p_Plan_Len		decimal(18,0)
+,@p_Plan_Qty		decimal(18,0)
+,@p_Prod_Qty		decimal(18,0)											
+,@p_Maker			nvarchar(10)		--	작성자													
+,@p_MakeDate		datetime			--	작성일													
+,@p_Editor			nvarchar(10)		--	수정자													
+,@p_EditDate		datetime			--	수정일	
+*/							
+		]]>
+	  </query>
+	<query content="procedure_insert TM_P1_INSERT_T_Plan_Mat_Use">TM_P1_INSERT_T_Plan_Mat_Use</query>
+	<query content="procedure_insert TM_P1_INSERT_T_Plan_Mat_Use desc">
+		<![CDATA[
+		/* 스켈프 투입 */
+	  /*
+※ p_PlanQty2 = (무게 * 1000 )/ 임시개수
+※ 임시개수 = (외경(ODValue) - 두께) * 두께 * 0.02491 * 제품길이
+ @p_PoNo			nchar(8),		-- 작업지시번호
+ @p_PoSeq			nchar(3),		-- 작업지시번호
+ @p_EqCode			nchar(4),		-- 설비코드
+ @p_Mat_Barcode     nchar(22),		-- 사용 스켈프 바코드  
+ @p_Std_OD_NAME		decimal(18,2),	-- 규격외경
+ @p_Std_LEN			decimal(18,2),	-- 규격길이
+ @p_PlanQty1		decimal(18,0),	-- 생산지시수량
+ @p_PlanQty2		decimal(18,0),	-- 코일 무게별 생산예상수량
+ @p_All_Use_Flag	nchar(1),		-- 소진여부
+ @p_Use_WGT			DECIMAL,		-- 사용중량
+ @p_Maker			nvarchar(10),	--
+ @p_MakeDate		datetime,		--
+ @p_Editor			nvarchar(10),	--
+ @p_EditDate		datetime		--
+ */							
+		]]>
+	  </query>
+	  
+	  
+	  <query content="procedure_insert TM_P1_INSERT_WASTE">TM_P1_INSERT_WASTE</query>  
+	  <query content="procedure_insert TM_P1_INSERT_WASTE desc">
+		<![CDATA[
+		/* 폐철 등록 1차*/
+TM_P1_INSERT_WASTE		
+/*
+@p_PO_No			nchar(8),		-- 작업지시번호
+@p_Mat_Barcode		nchar(22),		-- 스켈프번호
+@p_Proc_Code		nchar(2),		-- 공정
+@p_Waste_Seq		decimal(18,0),	-- 폐철길이
+@p_Bad_Code			nchar(6),		-- 폐철사유
+@p_Maker			nvarchar(10),	--
+@p_MakeDate			datetime,		--
+@p_Editor			nvarchar(10),	--
+@p_EditDate			datetime		--
+*/					
+		]]>
+	  </query>
+	  
+	  <query content="procedure_insert TM_P2_INSERT_T_Plan_Prod_Use">TM_P2_INSERT_T_Plan_Prod_Use</query>
+	  <query content="procedure_insert TM_P2_INSERT_T_Plan_Prod_Use desc">
+		<![CDATA[
+		/* 제품 투입 2차 */
+/*
+ @p_PoNo			nchar(8),		-- 작업지시번호
+ @p_POSeq			nchar(3),		-- 작업지시순번
+ @p_ProcCode		nchar(2),		-- 작업지시순번
+ @p_Use_Prod_No		nchar(2),		-- 작업지시투입순번
+ @p_Prod_Barcode    nchar(24),		-- 사용 바코드  
+ @p_Use_Qty			decimal(18,0),	-- 투입수량
+ @p_Maker			nvarchar(10),	--
+ @p_MakeDate		datetime,		--
+ @p_Editor			nvarchar(10),	--
+ @p_EditDate		datetime		--	
+*/ 						
+		]]>
+	  </query>
+	  
+	  <query content="procedure_insert TM_P2_INSERT_WASTE">TM_P2_INSERT_WASTE</query>
+	  <query content="procedure_insert TM_P2_INSERT_WASTE desc">
+		<![CDATA[
+		/* 잔량 등록 1차 */
+		/* 폐철 등록 2차 */
+/*
+@p_PO_No			nchar(8),		-- 작업지시번호
+@p_Prod_Barcode		nchar(24),		-- 스켈프번호
+@p_Proc_Code		nchar(2),		-- 공정
+@p_Waste_Seq		decimal(18,0),	-- 폐철길이
+@p_Qty				decimal(18,0),	--	불량수량
+@p_Bad_Code			nchar(6),		-- 폐철사유
+@p_Maker			nvarchar(10),	--
+@p_MakeDate			datetime,		--
+@p_Editor			nvarchar(10),	--
+@p_EditDate			datetime		--
+*/							
+		]]>
+	  </query>
+	  
+	  <query content="procedure_update TM_P1_UPDATE_End_Packing">TM_P1_UPDATE_End_Packing</query>
+	  <query content="procedure_update TM_P1_UPDATE_End_Packing desc">
+		<![CDATA[
+		/* 포장 완료 (1차 2차 공통) */
+		 @p_Enter_Date		datetime			--	작업완료일자																					
+		,@p_PO_No			nchar(8)			--	생산지시번호													
+		,@p_PO_Seq			nchar(3)			--	생산지시행번													
+		,@p_Proc_Code		nchar(2)			--	처리공정
+		,@p_Status			nchar(1)			--	진행상태(A,I,W,E)																								
+		,@p_Editor			nvarchar(10)		--	수정자													
+		,@p_EditDate		datetime			--	수정일					
+		]]>
+	</query>
+
+	<query content="procedure_update TM_P1_UPDATE_End_Production">TM_P1_UPDATE_End_Production</query>
+	<query content="procedure_update TM_P1_UPDATE_End_Production desc">
+		<![CDATA[
+		/* 1공정 완료 */
+		@p_PoNo        nchar(8),		-- 작업지시번호
+		@p_PoSeq       nchar(3),		-- 시퀀스
+		@p_EqCode      nchar(12),		-- 설비코드  
+		@p_ProcCode    nchar(2),		-- 
+		@p_PLC_Qty		decimal,		-- 
+		@p_ProcSDate	datetime,		--
+		@p_ProcEDate	datetime,		--
+		@p_Mat_BarCode	nchar(22),		--
+		@p_Status		nchar(1),		--	상태값(0 : 재입고, 1 : 폐철)
+		@p_Mat_Len		decimal(18,10),	--	잔량길이
+		@p_Mat_WGT		decimal(18,10),	--	잔량무게
+		@p_ProdSeq		nchar(2),		--	생산순번
+		@p_ProdLen		decimal(18,2),	--	생산길이
+		@p_ProdQty		decimal(18,2),	--	생산수량
+		@p_Maker		nvarchar(10),	--
+		@p_MakeDate	datetime,		--
+		@p_Editor		nvarchar(10),	--
+		@p_EditDate	datetime		--				
+		]]>
+	</query>
+	  
+	  <query content="procedure_update TM_P2_UPDATE_End_Production">TM_P2_UPDATE_End_Production</query>
+	  <query content="procedure_update TM_P2_UPDATE_End_Production desc">
+		<![CDATA[
+		/* 2공정 완료 */
+		 @p_PoNo        nchar(8),		-- 작업지시번호
+		 @p_PoSeq       nchar(3),		-- 시퀀스
+		 @p_EqCode      nchar(12),		-- 설비코드  
+		 @p_ProcCode    nchar(2),		-- 
+		 @p_PLC_Qty		decimal,		-- 
+		 @p_ProcEDate	datetime,		--
+		 @p_ProdSeq		nchar(2),		--	생산순번
+		 @p_ProdLen		decimal(18,2),	--	생산길이
+		 @p_ProdQty		decimal(18,2),	--	생산수량
+		 @p_Maker		nvarchar(10),	--
+		 @p_MakeDate	datetime,		--
+		 @p_Editor		nvarchar(10),	--
+		 @p_EditDate	datetime		--				
+		]]>
+	</query>
+	  
+	  <query content="table_delete tb_local_monitoring.yesterday_data">
+		<![CDATA[
+			/* 하루 전 데이터는 삭제 함. */
+			DELETE FROM TB_LOCAL_MONITORING 
+			WHERE   (CONVERT(varchar(20), CONVERT(NUMERIC, '{0}') 
+					- CONVERT(NUMERIC, '{0}')) > '1000000') 
+			AND STATUS = 'E';							
+		]]>
+	  </query>
+	  
+	  <query content="table_insert add_prod_use">
+		<![CDATA[
+		/* 
+		저장 프로시저인 TM_P2_INSERT_T_Plan_Prod_Use 의 대체형.
+		기존 프로시저는 자재(파이프) 투입 시 사용 횟수(Use Prod No)의 자동 증가가 없기에
+		본 프로그램의 로직이 복잡해 지는 관계로 동일 기능의 쿼리를 추출 함.
+		 */
+	DECLARE @retval		INT
+	DECLARE @CNT		INT
+	DECLARE @IDX		INT
+	DECLARE @CUST_CODE	INT
+	EXECUTE @retval = sys.xp_MSADEnabled
+
+
+	--사용 스켈프 순번 구함
+	SELECT @CNT = COUNT(*) FROM T_Plan_Mat_Use 
+	WHERE 
+	PO_No = @p_Po_No
+
+	INSERT INTO T_PLAN_PROD_USE
+	(
+		PO_No
+		,PO_Seq
+		,Proc_Code
+		,Use_Prod_No
+		,Prod_Barcode
+		,Use_Qty
+		,Maker
+		,MakeDate
+	)
+	VALUES
+	(
+		@p_Po_No	
+		,@p_PO_Seq
+		,@p_Proc_Code
+		,(select count(*) from T_Plan_Prod_Use where PO_No = @p_PO_No) + 1
+		,@p_Prod_Barcode
+		,@p_Use_Qty		
+		,@p_Maker		
+		,@p_MakeDate	
+	)
+	
+	--사용 스켈프 순번 구함
+	SELECT @CNT = COUNT(*) FROM T_PROD_USE WHERE CONVERT(VARCHAR(8),USE_DATE ,112) = CONVERT(VARCHAR(8),@p_MakeDate,112)
+	
+	INSERT INTO T_PROD_USE 
+	(
+		Use_Date
+		,Use_Seq
+		,Use_Div
+		,DE_No
+		,DE_Seq
+		,Cust_Code
+		,Prod_Barcode
+		,Use_Qty
+		,Maker
+		,MakeDate
+	)
+	VALUES
+	(
+		@p_MakeDate
+		,@CNT +1
+		,'P'
+		,''
+		,''
+		,''
+		,@p_Prod_Barcode
+		,@p_Use_Qty
+		,@p_Maker
+		,@p_MakeDate
+	)					
+		]]>
+	  </query>
+	  
+	  <query content="table_insert add_task_process">
+		<![CDATA[
+		/*  */
+
+if ( (
+	select 
+		count(*) 
+	from 
+		T_Plan_Runing 
+	where 
+		PO_No = @p_PO_No and
+		Proc_Code = @p_Proc_Code
+	) = 0 )
+begin		
+	INSERT INTO T_Plan_Runing 				
+	(				
+		 PO_No			
+		,PO_Seq			
+		,Prod_Seq			
+		,Eq_Code			
+		,Proc_Code			
+		,Proc_S_Date			
+		,Prod_Len 			
+		,Prod_Qty					
+		,PLC_Qty			
+		,Proc_ING			
+		,Worker			
+		,Status			
+		,Maker			
+		,MakeDate			
+	)				
+	VALUES				
+	(				
+		 @p_PO_No			
+		,@p_PO_Seq			
+		,@P_Prod_Seq			
+		,@p_Eq_Code			
+		,@p_Proc_Code			
+		,@p_MakeDate			
+		,@p_Prod_Len			
+		,@p_Prod_QTY			
+		,0
+		,'Y'			
+		,@p_Maker			
+		,'A'		/* 공정 추가시엔 기본적으로 대기 상태 */
+		,@p_Maker			
+		,@p_MakeDate			
+	)
+end
+;
+if ( (
+	select 
+		count(*) 
+	from 
+		T_Plan_Runing_Recv 
+	where 
+		PO_No = @p_PO_No and
+		Proc_Code = @p_Proc_Code
+	) = 0 )
+begin
+	insert into T_Plan_Runing_Recv
+	(	PO_No
+		,Proc_Code
+		,Recv_Qty
+	)
+	values
+	(
+		@p_PO_No
+		,@p_Proc_Code	
+		,0
+	)
+end
+;
+		]]>
+	  </query>
+	  
+	  <query content="table_insert add_task_process_waste">
+	  <![CDATA[
+	  	/* 폐철 처리 내역 확인을 위한 보조 테이블 */
+insert into T_Plan_Runing_Waste
+(
+	PO_No,
+	Proc_Code,
+	Waste_Code,
+	Waste_Qty,
+	MakeDate
+)
+values
+(
+	@p_PO_No,
+	@p_Proc_Code,
+	@p_Waste_Code,
+	@p_Waste_Qty,
+	@p_MakeDate
+)
+;
+	  	]]>
+	  </query>
+
+	  
+	  <query content="table_select find_bad_code">
+		<![CDATA[
+		/* 폐철 등록, 불량 등록 시 쓰이는 불량 코드 목록을 가져 온다. */
+SELECT 
+	 Bad_Code
+	,Bad_Name 
+FROM 
+	DBO.T_BadMaster 
+WHERE 
+	BAD_KIND ='BD'
+;							
+		]]>
+	  </query>
+	  
+	  <query content="table_select find_customer_code">
+		<![CDATA[
+		/* 바코드 발행 시 고객 코드 검색을 한다. */
+SELECT 
+	[Cust_Name_SN] as Name
+	,Cust_Code as Code
+	
+FROM 
+	[IHPOP].[dbo].[T_Customer] 
+WHERE 
+	Use_Flag = 'Y' and
+	Cust_Name_SN <> ''
+	/*AND 
+	Cust_Code = @p_Cust_Code*/
+order by
+	Name asc
+;
+		]]>
+	  </query>
+	  
+	  <query content="table_select find_equipment">
+		<![CDATA[
+		/* 설비 변경 시 리스트로 출력 될 설비 이름 및 코드 */
+SELECT 
+	 Eq_Code
+	,Eq_Name 
+FROM 
+	T_Equipment
+;
+		]]>
+	  </query>
+	  
+	  
+	  <query content="table_select find_outer_diamenter">
+		<![CDATA[
+		/* 바코드 발행 시 외경 정보를 가져 온다. */
+SELECT 
+	OD_NAME,
+	OD_Value,
+	
+	Prod_Code
+FROM 
+	T_OutDiameter 
+where
+	OD_Value <> 0
+	
+order by
+	OD_Name						
+		]]>
+	  </query>
+	  <query content="table_select find_prod_info">
+		<![CDATA[
+		/* 가공 할 제품의 정보를 가져 온다. */
+SELECT  
+    CONVERT(VARCHAR(8),Enter_Date,112) AS Enter_Date
+   ,M.Prod_Barcode
+   ,(SELECT DISTINCT PROD_NAME FROM T_PRODUCT WHERE Prod_Code = M.PROD_CODE) AS Mat_Code
+   ,OD_Value
+   ,LEN
+   ,THK
+   ,M.Usable_Qty
+   ,Prod_Status
+   ,'투입대기' AS Input_Status_NM
+   ,'N' AS Input_Status_CD
+   ,Prod_code
+   ,OD_Name
+   ,Prod_Quality
+FROM IHPOP.dbo.T_Prod_Enter M
+WHERE 
+   M.Prod_Barcode = @p_Barcode
+;							
+		]]>
+	  </query>
+	  
+	  <query content="table_select find_prod_info_temp">
+		<![CDATA[
+		/* 가공 할 제품의 정보를 가져 온다. */
+SELECT  
+    CONVERT(VARCHAR(8),Enter_Date,112) AS Enter_Date
+   ,M.Prod_Barcode
+   ,(SELECT DISTINCT PROD_NAME FROM T_PRODUCT WHERE Prod_Code = M.PROD_CODE) AS Mat_Code
+   ,OD_Value
+   ,LEN
+   ,THK
+   ,M.Usable_Qty
+   ,Prod_Status
+   ,'투입대기' AS Input_Status_NM
+   ,'N' AS Input_Status_CD
+   ,Prod_code
+   ,OD_Name
+FROM IHPOP.dbo.T_Prod_Enter_TEMP M
+WHERE 
+   M.Prod_Barcode = @p_Barcode
+;							
+		]]>
+	  </query>
+	  <query content="table_select find_prod_input">
+		<![CDATA[
+		/* 
+		제품(파이프) 투입 현황 검색 
+		투입 현황을 리스트화 하기 위해 처음 3번째 까지는 중복된 데이터로 두고,
+		이 들에 대한 항목명을 한글로 해 둠.
+		*/
+SELECT  
+	 pe.Prod_Barcode as 코드
+	,pe.LEN as 길이
+	,pe.Usable_Qty as 수량
+	,CONVERT(VARCHAR(8), pe.Enter_Date, 112) AS Enter_Date
+	,pe.Prod_Barcode
+	,(SELECT DISTINCT PROD_NAME FROM T_PRODUCT WHERE Prod_Code = pe.PROD_CODE) AS Mat_Code
+	,pe.OD_Value
+	,pe.LEN
+	,pe.THK
+	,pe.Usable_Qty
+	,pe.Prod_Status
+	,'투입대기' AS Input_Status_NM
+	,'N' AS Input_Status_CD
+	,pe.Prod_code
+	,pe.OD_Name
+	,pu.PO_No
+   ,Prod_Quality
+FROM 
+	T_Plan_Prod_Use pu
+	left outer join T_Prod_Enter pe
+	on pu.Prod_Barcode = pe.Prod_Barcode
+WHERE 
+   pu.PO_No = @p_PO_No
+/*order by
+   pe.Enter_Date desc*/
+;		
+		]]>
+	  </query>
+	  
+	  <query content="table_select find_prod_input_temp">
+		<![CDATA[
+		/* 
+		가입고 투입 현황 검색
+		*/
+SELECT  
+	 pe.Prod_Barcode as 코드
+	,pe.LEN as 길이
+	,pe.Usable_Qty as 수량
+	,CONVERT(VARCHAR(8), pe.Enter_Date, 112) AS Enter_Date
+	,pe.Prod_Barcode
+	,(SELECT DISTINCT PROD_NAME FROM T_PRODUCT WHERE Prod_Code = (SELECT DISTINCT P2_Prod_Code FROM T_Plan_Detail WHERE PO_No = @p_PO_No)) AS Mat_Code
+	,pe.OD_Value
+	,pe.LEN
+	,pe.THK
+	,pe.Usable_Qty
+	,pe.Prod_Status
+	,'투입대기' AS Input_Status_NM
+	,'N' AS Input_Status_CD
+	,(SELECT DISTINCT P2_Prod_Code FROM T_Plan_Detail WHERE PO_No = @p_PO_No) as Prod_Code
+	,pe.OD_Name
+	,pu.PO_No
+	,'' as Prod_Quality
+FROM 
+	T_Plan_Prod_Use pu
+	left outer join T_Prod_Enter_TEMP pe
+	on pu.Prod_Barcode = pe.Prod_Barcode
+WHERE 
+   pu.PO_No = @p_PO_No
+order by
+   pe.Enter_Date desc
+;		
+		]]>
+	  </query>
+	  
+	 <query content="table_select find_product_code">
+		<![CDATA[
+		/* 바코드 발행 시 제품코드(SPEC) 정보를 가져 온다. */
+SELECT 
+	Prod_Code,
+	Prod_Name 
+FROM 
+	T_Product 
+;					
+		]]>
+	  </query>
+
+	<query content="table_select find_skelp_info_by_barcode">
+		<![CDATA[
+		/* 스켈프 바코드로 해당 스켈프 정보를 가져 온다. */
+SELECT 
+	 Mat_LOT_NO
+	,THK
+	,Usable_WGT
+	,OD_LHT
+	,REPLACE(
+		(
+		SELECT DISTINCT SYS_NAME
+		FROM T_CodeMaster  WHERE Sys_Code = Mat_Quality AND Sys = 'MM' and Code_Type = '48'
+		)
+		,'STS','') as Qual
+	,CONVERT(VARCHAR,Enter_Date,102) as Enter_Date
+	,MAT_STATUS 
+	,OD_VALUE 
+	,MAT_BARCODE 
+	,Mat_Quality
+	,Mat_Code
+	,'0' as ProdLen
+	,'0' as ProdQty
+FROM T_Mat_Enter
+
+WHERE MAT_BARCODE = @p_Barcode;
+		]]>
+	  </query>
+	
+	<query content="table_select find_skelp_info_by_matno">
+		<![CDATA[
+		/* 스켈프 바코드로 해당 스켈프 정보를 가져 온다. */
+SELECT 
+	 Mat_LOT_NO
+	,THK
+	,Usable_WGT
+	,OD_LHT
+	,REPLACE(
+		(
+		SELECT DISTINCT SYS_NAME
+		FROM T_CodeMaster  WHERE Sys_Code = Mat_Quality AND Sys = 'MM' and Code_Type = '48'
+		)
+		,'STS','') as Qual
+	,CONVERT(VARCHAR,Enter_Date,102) as Enter_Date
+	,MAT_STATUS 
+	,OD_VALUE 
+	,MAT_BARCODE 
+	,Mat_Quality
+	,Mat_Code
+	,'0' as ProdLen
+	,'0' as ProdQty
+FROM T_Mat_Enter
+
+WHERE Mat_Lot_No = @p_Mat_No;
+		]]>
+	  </query>
+	  
+	  <query content="table_select find_skelp_input">
+		<![CDATA[
+		/* 
+		스캘프 투입 현황 검색 
+		투입 현황을 리스트화 하기 위해 처음 3번째 까지는 중복된 데이터로 두고,
+		이 들에 대한 항목명을 한글로 해 둠.
+		*/
+select 
+	 mu.Mat_Barcode as 코드
+	,me.Usable_WGT as 중량
+	,REPLACE(
+		(
+		SELECT DISTINCT SYS_NAME
+		FROM T_CodeMaster  WHERE Sys_Code = Mat_Quality AND Sys = 'MM' and Code_Type = '48'
+		)
+		,'STS','') as 강종
+	,me.Mat_LOT_NO
+	,me.THK
+	,me.Usable_WGT
+	,me.OD_LHT
+	,REPLACE(
+		(
+		SELECT DISTINCT SYS_NAME
+		FROM T_CodeMaster  WHERE Sys_Code = Mat_Quality AND Sys = 'MM' and Code_Type = '48'
+		)
+		,'STS','') as Qual
+	,CONVERT(VARCHAR, me.Enter_Date, 102) as Enter_Date
+	,me.MAT_STATUS 
+	,me.OD_VALUE 
+	,me.MAT_BARCODE 
+	,me.Mat_Quality
+	,me.Mat_Code
+	,mu.ProdLen
+	,mu.ProdQty
+from
+	T_Plan_Mat_Use mu
+	left outer join T_Mat_Enter me
+	on mu.Mat_Barcode = me.Mat_Barcode
+where
+	mu.PO_No = @p_PO_No
+/*order by
+	me.Enter_Date desc*/
+		]]>
+	  </query>
+	  <query content="table_select find_spec_code">
+		<![CDATA[
+		/* 바코드 발행 시 SPEC 정보 검색 */
+SELECT 
+	Prod_Code,
+	Prod_Name
+FROM 
+	T_Product
+;
+		]]>
+	  </query> 
+	  <query content="table_select find_task_order_by_code">
+		<![CDATA[
+		/* 작업 지시 조회: 코드로 검색 */
+SELECT 			
+	 M.Eq_Code	
+	,D.PO_No		
+	,D.PO_Seq	
+	,M.ORDER_DATE
+	,D.Prog_Div
+	,(CASE WHEN D.PO_Div  = 'O' THEN '주문' ELSE '재고' END) AS PO_Div
+	,D.Ex_Div
+	,(SELECT [Cust_Name_SN] FROM T_Customer WHERE [Cust_Code] = M.Real_Cust_Code) AS Real_Cust_Name	
+	,M.Real_Cust_Code
+	,D.Comp_Prod_Code
+	,D.Comp_OD_Value
+	,D.Comp_OD_Name
+	,D.Comp_THK
+	,D.Remark
+	,D.Comp_LEN
+	,D.Comp_Qty
+	,D.Comp_WGT
+	,(SELECT PROD_NAME FROM T_PRODUCT WHERE Prod_Code = D.[P1_Prod_Code])  AS P1_Prod_Name	
+	,(SELECT PROD_NAME FROM T_PRODUCT WHERE Prod_Code = D.[P2_Prod_Code])  AS P2_Prod_Name
+	,D.[P1_Prod_Code]
+	,D.[P1_OD_Name]		
+	,D.[P1_OD_Value]
+	,D.[P1_THK]		
+	,D.[P1_LEN]		
+	,ROUND(CONVERT(DECIMAL(18,0), D.P1_WGT),2) AS P1_WGT		
+	,D.P1_Qty 	
+	,D.[P2_Prod_Code]
+	,D.[P2_OD_Name]
+	,D.[P2_OD_Value]
+	,D.[P2_THK]		
+	,D.[P2_LEN]		
+	,ROUND(CONVERT(DECIMAL(18,0), D.P2_WGT),2) AS P2_WGT		
+	,D.P2_Qty 
+	,CONVERT(NVARCHAR,D.Due_Comp_Date,112) AS Due_Comp_Date		
+	,D.Must_Proc_Code
+	,D.Status
+	,(CASE 
+		WHEN D.Status = 'A' THEN '지시대기' 
+		WHEN D.Status = 'I' THEN '생산중'
+		WHEN D.Status = 'W' THEN '생산중지'
+		ELSE '생산완료' 
+	  END) AS Status_Kor
+	,D.Must_Proc_Name
+	,D.ERP_Len
+	,(SELECT Quality FROM T_Product WHERE Prod_Code = D.P1_Prod_Code) AS Quality1
+	,(SELECT Quality FROM T_Product WHERE Prod_Code = D.P2_Prod_Code) AS Quality2
+	,REPLACE((SELECT Sys_Name FROM T_CodeMaster WHERE SYS_CODE =(SELECT Quality FROM T_Product WHERE Prod_Code = Comp_Prod_Code)),'STS','') AS Qual
+	,M.Quality as Comp_Quality
+FROM 
+	[IHPOP].[dbo].T_Plan_Header M			
+	LEFT OUTER JOIN T_Plan_Detail D			
+	ON M.PO_NO = D.PO_No 			
+WHERE 			
+	D.PO_No like (@p_PO_No + '%')
+ORDER BY
+	D.ERP_PO_Date desc, D.PO_No	desc
+;				
+		]]>
+	  </query>  
+	  <query content="table_select find_task_order_by_date">
+		<![CDATA[
+		/* 작업 지시 조회: 날짜로 검색 */
+SELECT 			
+	 M.Eq_Code	
+	,D.PO_No		
+	,D.PO_Seq	
+	,M.ORDER_DATE
+	,D.Prog_Div
+	,(CASE WHEN D.PO_Div  = 'O' THEN '주문' ELSE '재고' END) AS PO_Div
+	,D.Ex_Div
+	,(SELECT [Cust_Name_SN] FROM T_Customer WHERE [Cust_Code] = M.Real_Cust_Code) AS Real_Cust_Name	
+	,M.Real_Cust_Code
+	,D.Comp_Prod_Code
+	,D.Comp_OD_Value
+	,D.Comp_OD_Name
+	,D.Comp_THK
+	,D.Remark
+	,D.Comp_LEN
+	,D.Comp_Qty
+	,D.Comp_WGT
+	,(SELECT PROD_NAME FROM T_PRODUCT WHERE Prod_Code = D.[P1_Prod_Code])  AS P1_Prod_Name	
+	,(SELECT PROD_NAME FROM T_PRODUCT WHERE Prod_Code = D.[P2_Prod_Code])  AS P2_Prod_Name
+	,D.[P1_Prod_Code]
+	,D.[P1_OD_Name]		
+	,D.[P1_OD_Value]
+	,D.[P1_THK]		
+	,D.[P1_LEN]		
+	,ROUND(CONVERT(DECIMAL(18,0), D.P1_WGT),2) AS P1_WGT		
+	,D.P1_Qty 	
+	,D.[P2_Prod_Code]
+	,D.[P2_OD_Name]
+	,D.[P2_OD_Value]
+	,D.[P2_THK]		
+	,D.[P2_LEN]		
+	,ROUND(CONVERT(DECIMAL(18,0), D.P2_WGT),2) AS P2_WGT		
+	,D.P2_Qty 
+	,CONVERT(NVARCHAR,D.Due_Comp_Date,112) AS Due_Comp_Date		
+	,D.Must_Proc_Code
+	,D.Status
+	,(CASE 
+		WHEN D.Status = 'A' THEN '지시대기' 
+		WHEN D.Status = 'I' THEN '생산중'
+		WHEN D.Status = 'W' THEN '생산중지'
+		ELSE '생산완료' 
+	  END) AS Status_Kor
+	,D.Must_Proc_Name
+	,D.ERP_Len
+	,(SELECT Quality FROM T_Product WHERE Prod_Code = D.P1_Prod_Code) AS Quality1
+	,(SELECT Quality FROM T_Product WHERE Prod_Code = D.P2_Prod_Code) AS Quality2
+	,REPLACE((SELECT Sys_Name FROM T_CodeMaster WHERE SYS_CODE =(SELECT Quality FROM T_Product WHERE Prod_Code = Comp_Prod_Code)),'STS','') AS Qual
+	,M.Quality as Comp_Quality
+FROM 
+	[IHPOP].[dbo].T_Plan_Header M			
+	LEFT OUTER JOIN T_Plan_Detail D			
+	ON M.PO_NO = D.PO_No 					
+WHERE 			
+	M.ORDER_DATE >= @p_Date
+ORDER BY
+	D.ERP_PO_Date desc, D.PO_No	desc
+;				
+		]]>
+	  </query>
+	  <query content="table_select find_task_process">
+		<![CDATA[
+		/* 현재 공정에 대한 현황을 가져 온다. */
+select
+	 run.PO_No
+	,run.Eq_Code as Eq_Code
+	,run.Proc_Code as Proc_Code
+	,run.Status as Status
+	,run.Prod_Qty as Prod_Qty
+	,recv.Recv_Qty as Recv_Qty
+	,(select sum(Waste_Qty) from T_Plan_Runing_Waste w where w.PO_No = run.PO_No and w.Proc_Code = run.Proc_Code) as Waste_Count
+	,(select sum(Bad_Qty)   from T_Prod_Bad b   where b.PO_No = run.PO_No and b.Proc_Code = run.Proc_Code) as Bad_Count
+	,run.Maker as Maker
+	,(select count(*) from T_Plan_Mat_Use m where m.PO_No = run.PO_No) as Inserted_Mat_Count
+	,(select Mat_Barcode from T_Plan_Mat_Use m where m.PO_No = run.PO_No and m.MakeDate = 
+		(select max(MakeDate) from T_Plan_Mat_Use)) as Inserted_Mat_Code
+	,(select count(*) from T_Plan_Prod_Use p where p.PO_No = run.PO_No) as Inserted_Prod_Count
+	,(select Prod_Barcode from T_Plan_Prod_Use m where m.PO_No = run.PO_No and m.MakeDate =
+		(select max(MakeDate) from T_Plan_Prod_Use)) as Inserted_Prod_Code
+	,run.PO_Seq
+	,run.Prod_Seq
+	,run.Prod_Len
+	,(CASE 
+		WHEN run.Status = 'E' THEN '생산완료' 
+		WHEN run.Status = 'I' THEN '생산중'
+		WHEN run.Status = 'W' THEN '생산중지'
+		ELSE '지시대기' 
+	  END) AS Status_Kor
+	,(CASE 
+		WHEN run.Proc_Code = '1A' THEN '조관' 
+		WHEN run.Proc_Code = '1B' THEN '연마'
+		WHEN run.Proc_Code = '1C' THEN '조관PL'
+		WHEN run.Proc_Code = '1E' THEN '포장' 
+		WHEN run.Proc_Code = '2A' THEN '사각'
+		WHEN run.Proc_Code = '2B' THEN 'HL'
+		WHEN run.Proc_Code = '2C' THEN 'PL' 
+		WHEN run.Proc_Code = '2D' THEN '절단'
+		ELSE '포장' 
+	  END) AS Proc_Code_Kor
+	 ,(select Remaining from T_Plan_Runing_Remaining where PO_No = run.PO_No) as Remaining
+from
+	T_Plan_Runing run
+	left outer join T_Plan_Runing_Recv recv
+	on run.PO_No = recv.PO_No and run.Proc_Code = recv.Proc_Code
+	left outer join T_Plan_Runing_Remaining rm
+	on recv.PO_No = rm.PO_No and recv.Proc_Code = rm.Proc_Code
+where
+	run.PO_No = @p_PO_No
+order by
+	run.Proc_Code
+;
+	/*
+	left outer join T_Plan_Prod_Waste waste
+	on run.PO_No = waste.PO_No and
+	   run.Eq_Code = waste.Eq_Code
+	left outer join T_Plan_Prod_Bad bad
+	on waste.PO_No = Bad.PO_No and
+	   waste.Eq_Code = Bad.Eq_Code
+	   */
+							
+		]]>
+	  </query>
+	  <query content="table_select find_thickness">
+		<![CDATA[
+		/* 바코드 발행 시 두께 정보를 가져 온다. */
+SELECT 
+	DISTINCT Std_THK,
+	OD_Name,
+	Prod_Code
+FROM 
+	T_Thinkness 
+WHERE 
+	Std_THK <> 0.0 
+ORDER BY 
+	Std_THK
+;	
+		]]>
+	  </query>
+	  <query content="table_select find_worker_code">
+		<![CDATA[
+		/* 작업자 변경 시 작업자 목록을 가져 온다. */
+SELECT 
+	EMP_NAME as Code,
+	EMP_NAME as Name
+FROM 
+	DBO.T_EMPLOYEE 
+WHERE 
+	Work_YN ='Y' AND 
+	Busi_Place = 'A' AND 
+	Occup_Kind IN('06','07','09') 
+ORDER BY 
+	EMP_NAME							
+;
+		]]>
+	  </query>
+	  <query content="table_update change_prod_input">
+	<![CDATA[
+		/* 제품 투입 시 사용 */
+update T_Prod_Enter
+set
+	/*Usable_Qty = 0*/
+	Prod_Status = 'U'
+where
+	Prod_Barcode = @p_Barcode
+;
+
+update T_Plan_Runing
+set
+	Status = 'I'
+where
+	PO_No = @p_PO_No
+;
+
+update T_Plan_Detail
+set
+	Status = 'I'
+where
+	PO_No = @p_PO_No
+;
+	]]>
+	</query>
+	  <query content="table_update change_prod_remaining">
+	<![CDATA[
+		/* 제품 잔량 등록 시 사용 */
+if (@p_Usable_Qty <> 0)
+begin
+	update T_Prod_Enter
+	set
+		Usable_Qty = @p_Usable_Qty
+		,Prod_Status = 'P'
+	where
+		Prod_Barcode = @p_Barcode
+end
+else
+begin
+	delete from T_Prod_Enter
+	where 
+		Prod_Barcode = @p_Barcode
+end
+	]]>
+	</query>
+	  
+	  <query content="table_update change_skelp_input">
+		<![CDATA[
+		/* 스켈프 투입 시 사용 */
+update T_Mat_Enter
+set
+	/*Usable_WGT = 0*/
+	Mat_Status = 'O'
+where
+	Mat_Barcode = @p_Mat_Barcode
+;
+
+update T_Plan_Runing
+set
+	Status = 'I'
+where
+	PO_No = @p_PO_No
+;
+
+update T_Plan_Detail
+set
+	Status = 'I'
+where
+	PO_No = @p_PO_No
+;
+		]]>
+	  </query>
+	  <query content="table_update change_skelp_remaining">
+		<![CDATA[
+		/* 스켈프 잔량 등록 시 사용 */
+if (cast(@p_Usable_WGT as float) > 0)
+begin
+	update T_Mat_Enter
+	set
+		Usable_WGT = @p_Usable_WGT
+		,Mat_Status = 'I'
+	where
+		Mat_Barcode = @p_Mat_Barcode
+end
+else
+begin
+	delete from T_Mat_Enter
+	where 
+		Mat_Barcode = @p_Mat_Barcode
+end
+		]]>
+	  </query>
+	  
+	  <query content="table_update change_task_process_equip">
+		<![CDATA[
+		/* 공정 현황 등록 화면에서 설비 변경 */
+UPDATE 
+	T_Plan_Runing 			
+SET					
+	 eq_code = @p_Eq_Code				
+WHERE
+	PO_No	= @p_PO_No and	
+	Proc_Code = @p_Proc_Code
+;								
+		]]>
+	  </query>
+	  <query content="table_update change_task_process_prod_qty">
+		<![CDATA[
+		/* 공정 현황 등록 화면에서 실적수량 추가 */
+/*
+조건::
+1. 인수인 공정 코드의 다음 공정에 해당되는 코드를 구한다.
+2. 그 코드 값이 '' 이라면 현재 공정이 끝이므로 상품 수량 이월을 하지 않는다.
+3. 첫 공정이 1A(조관)이고 다음 공정이 1B나 1C일 경우 1E로 한다.
+4. 현재 공정이 1B인데 다음이 1C일 경우 그 다음 공정을 가리켜야 한다.
+*/
+
+declare 
+	@sNextProcCode varchar(2)
+/*
+ :::Test용 변수 선언부. 실제 쿼리 수행 시 파라메터로 사용 한다.
+	,@p_Proc_Code varchar(2)
+	,@p_PO_No varchar(20)
+	,@p_Prod_Qty_Add int
+	,@p_Eq_Code varchar(5)
+	
+
+set @p_PO_No = '10A26003'
+set @p_Proc_Code = '1A'
+*/
+select
+	@sNextProcCode = (select SUBSTRING( replace(Must_Proc_Code, 
+	@p_Proc_Code
+	, 'S'), charindex('S', replace(Must_Proc_Code, 
+	@p_Proc_Code
+	, 'S')) + 2, 2) 
+	from T_Plan_Detail where 
+	PO_No = @p_PO_No)
+
+if (@p_Proc_Code = '1A')
+begin
+	select @sNextProcCode = '1E'
+end
+
+if (@p_Proc_Code = '1E')
+begin
+	select @sNextProcCode = substring(Must_Proc_Code, 
+				charindex('2', Must_Proc_Code),
+				2)
+	from T_Plan_Detail
+	where PO_No = @p_PO_No
+end
+
+UPDATE 
+	T_Plan_Runing 			
+SET					
+	 Prod_Qty = Prod_Qty + @p_Prod_Qty_Add
+WHERE
+	PO_No	= @p_PO_No and	
+	Proc_Code = @p_Proc_Code	
+;
+
+		/* 코일/제품투입 시 받은 수량 업뎃 */
+if ((select count(*) from T_Plan_Runing_Recv where PO_No = @p_PO_No and Proc_Code = @p_Proc_Code) = 0)
+begin
+	insert into T_Plan_Runing_Recv
+	(
+		PO_No,
+		Proc_Code,
+		Recv_Qty
+	)
+	values
+	(
+		@p_PO_No,
+		@p_Proc_Code,
+		0 - @p_Prod_Qty_Add
+	)
+end
+else
+begin
+	UPDATE 
+		T_Plan_Runing_Recv
+	SET					
+		Recv_Qty = Recv_Qty - @p_Prod_Qty_Add
+	WHERE
+		PO_No	= @p_PO_No and	
+		Proc_Code = @p_Proc_Code	
+end
+;	
+
+/* 다음 공정에서 받은 수량 데이터가 존재하지 않으면 새로 삽입 한다. */
+if ( @sNextProcCode <> '' )
+begin
+	if ((select count(*) from T_Plan_Runing_Recv where PO_No = @p_PO_No and Proc_Code = @sNextProcCode) = 0)
+	begin
+		insert into T_Plan_Runing_Recv
+		(
+			PO_No,
+			Proc_Code,
+			Recv_Qty
+		)
+		values
+		(
+			@p_PO_No,
+			@sNextProcCode,
+			@p_Prod_Qty_Add
+		)
+	end
+	else
+	begin
+		UPDATE 
+			T_Plan_Runing_Recv		
+		SET					
+			Recv_Qty = Recv_Qty + @p_Prod_Qty_Add
+		WHERE
+			PO_No	= @p_PO_No and	
+			Proc_Code = @sNextProcCode	
+	end
+end
+;
+		]]>
+	  </query>
+	  <query content="table_update change_task_process_recv_qty">
+		<![CDATA[
+		/*  코일/제품투입 및 불량, 폐철 등록 시 받은 수량 업뎃. 
+		    기본적으로 파라메터 값 만큼 받은 수량과 잔량을 뺀다.
+		*/
+if ((select count(*) from T_Plan_Runing_Recv where PO_No = @p_PO_No and Proc_Code = @p_Proc_Code) = 0)
+begin
+	insert into T_Plan_Runing_Recv
+	(
+		PO_No,
+		Proc_Code,
+		Recv_Qty
+	)
+	values
+	(
+		@p_PO_No,
+		@p_Proc_Code,
+		@p_Prod_Qty_Add
+	)
+end
+else
+begin
+	UPDATE 
+		T_Plan_Runing_Recv
+	SET					
+		Recv_Qty = Recv_Qty - @p_Prod_Qty_Add
+	WHERE
+		PO_No	= @p_PO_No and	
+		Proc_Code = @p_Proc_Code	
+end
+;	
+		]]>
+	  </query>
+	  
+	  <query content="table_update change_task_process_remaining">
+		<![CDATA[
+		/*  */
+if ((select count(*) from T_Plan_Runing_Remaining where PO_No = @p_PO_No and Proc_Code = @p_Proc_Code) = 0)
+begin
+	insert into T_Plan_Runing_Remaining
+	(
+		PO_No,
+		Proc_Code,
+		Remaining
+	)
+	values
+	(
+		@p_PO_No,
+		@p_Proc_Code,
+		@p_Remaining
+	)
+end
+else
+begin
+	UPDATE 
+		T_Plan_Runing_Remaining
+	SET					
+		Remaining = @p_Remaining
+	WHERE
+		PO_No	= @p_PO_No and	
+		Proc_Code = @p_Proc_Code	
+end
+;	
+		]]>
+	  </query>
+	  <query content="table_update change_task_process_worker">
+		<![CDATA[
+		/* 공정 현황 등록 화면에서 작업자 변경 */
+UPDATE 
+	T_Plan_Runing 			
+SET					
+	 Worker = @p_Worker				
+	,Maker = @p_Worker				
+WHERE
+	PO_No	= @p_PO_No and	
+	eq_code = @p_Eq_Code and
+	Proc_Code = @p_Proc_Code
+;							
+		]]>
+	  </query>
+	  <query content="table_update regist_remaining_product">
+		<![CDATA[
+/* 제품(파이프) 잔량 등록 쿼리 */
+declare
+	@iRowCount int
+
+set
+	@iRowCount = (select Count(*) from T_Plan_Prod_Use where PO_No = @p_PO_No)
+
+insert into T_Plan_Prod_Use
+(
+	PO_No,
+	PO_Seq,
+	Proc_Code,
+	Use_Prod_No, /* 현재 제품에 대한 사용 횟수 */
+	Prod_Barcode,
+	Use_Qty,
+	Maker,
+	MakeDate,
+	Editor,
+	EditDate
+)
+values
+(
+	@p_PO_No,
+	@p_PO_Seq,
+	@p_Proc_Code,
+	@iRowCount + 1,
+	@p_Prod_Barcode,
+	@p_Use_Qty,
+	@p_Maker,
+	@p_MakeDate,
+	@p_Editor,
+	@p_EditDate
+)
+		]]>
+	  </query>
+	  <query content="table_update task_order_start">
+		<![CDATA[
+		/*  */
+UPDATE T_Plan_Runing 
+SET
+	Worker = @p_Maker 
+	,Status = 'I'
+WHERE 
+	PO_No = @p_PoNo AND PO_Seq = @p_PO_Seq	
+		
+UPDATE T_Plan_Detail
+SET
+	Status = 'I'
+	,Worker = @p_Maker 
+	,Editor = @p_Editor
+	,EditDate = @p_EditDate
+WHERE
+	PO_No = @p_PoNo
+	AND PO_Seq = @p_PO_Seq 
+
+UPDATE T_Plan_Header
+SET
+	Status = 'I'
+	,Editor = @p_Editor
+	,EditDate = @p_EditDate
+WHERE
+	PO_No = @p_PoNo
+
+
+SELECT * FROM T_Plan_PLC_Result WHERE Eq_Code = @p_Eq_Code 
+IF @@ROWCOUNT = 0
+	INSERT INTO T_Plan_PLC_Result(Use_Flag,Eq_Code,PO_No,PO_Seq)
+	VALUES('1',@p_Eq_Code,@p_PoNo,@p_PO_Seq)
+ELSE
+	
+	UPDATE T_Plan_PLC_Result
+	SET
+		Use_Flag = '1'
+		,PO_No = @p_PoNo 
+		,PO_Seq = @p_PO_Seq 
+		,Editor = @p_Editor
+		,EditDate = GETDATE()
+	WHERE
+		eq_code = @p_Eq_Code
+END							
+		]]>
+	  </query>
+	  <query content="table_update task_order_status">
+		<![CDATA[
+		/* 작업 지시 화면의 공정 상태 정보 갱신 */
+update
+	T_Plan_Detail
+SET
+	Status = @p_Status
+WHERE
+	PO_No	= @p_PO_No
+;
+		]]>
+	  </query> 
+	<query content="table_update task_process_end">
+		<![CDATA[
+		/* 공정 상태 변화 시 사용 */
+update 
+	T_Plan_Runing
+set
+	Status = 'E',
+	Proc_E_Date = @p_End_Date,
+	Proc_ING = 'N'
+where
+	PO_No = @p_PO_No
+;
+
+update
+	T_Plan_Detail
+set
+	Status = 'E'
+where
+	PO_No = @p_PO_No
+;
+		]]>
+	  </query>
+	<query content="table_update task_process_start">
+		<![CDATA[
+		/* 공정 상태 변화 시 사용 */
+update 
+	T_Plan_Runing
+set
+	Status = 'I',
+	Proc_S_Date = @p_Start_Date,
+	Proc_ING = 'Y'
+where
+	PO_No = @p_PO_No 
+	/* and Proc_Code = @p_Proc_Code *//* 시작 시 해당 지시 내역의 모든 공정들을 업데이트 한다. */
+;
+update
+	T_Plan_Detail
+SET
+	Status = 'I'
+WHERE
+	PO_No	= @p_PO_No
+;
+		]]>
+	  </query>
+	<query content="zz_sample">
+	<![CDATA[
+	/*  */
+						
+	]]>
+	</query>
+	<query content="zz_sample">
+	<![CDATA[
+	/*  */
+						
+	]]>
+	</query>
+	<query content="zz_sample">
+	<![CDATA[
+	/*  */
+						
+	]]>
+	</query>
+	<query content="zz_sample">
+	<![CDATA[
+	/*  */
+						
+	]]>
+	</query>
+	<query content="zz_sample">
+	<![CDATA[
+	/*  */
+						
+	]]>
+	</query>
+	<query content="zz_sample">
+	<![CDATA[
+	/*  */
+						
+	]]>
+	</query>
+	<query content="zz_sample">
+	<![CDATA[
+	/*  */
+						
+	]]>
+	</query>
+	<query content="zz_sample">
+	<![CDATA[
+	/*  */
+						
+	]]>
+	</query>
+  </dbtype>
+</queries>

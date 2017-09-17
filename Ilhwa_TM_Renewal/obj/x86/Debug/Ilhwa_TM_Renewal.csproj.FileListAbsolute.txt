@@ -1,0 +1,96 @@
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.MainForm.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TasRegistPart.FormEquipChange.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormBarcodePrinter.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormChainInputList.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FormConfig.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Common.FormGridSelector.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Common.FormNumberPad.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormProgressBar.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormSearchOption.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Common.GridSelectorView.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.MsgBox.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FormTaskOrderList.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FormTaskRegist.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskOrderView.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FormTaskProcessList.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskOrderViewList.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskProcessViewList.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskProcessView.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TasRegistPart.BarcodePrinterViewPart.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FindMaterialsViewPart.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TasRegistPart.TaskMaterialsViewPart.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TasRegistPart.InputStatusListViewPart.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskOrderViewPart.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskProcessViewPart.resources
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Ilhwa_TM_Renewal.csproj.GenerateResource.Cache
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\bin\Ilhwa_TM_Renewal.exe.config
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\bin\Ilhwa_TM_Renewal.exe
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\bin\Ilhwa_TM_Renewal.pdb
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Ilhwa_TM_Renewal.exe
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Ilhwa_TM_Renewal.pdb
+D:\00 Work\일화스텐레스\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormBarcodeList.resources
+D:\00work\Ilhwa_TM_Renewal\bin\Ilhwa_TM_Renewal.exe.config
+D:\00work\Ilhwa_TM_Renewal\bin\Ilhwa_TM_Renewal.exe
+D:\00work\Ilhwa_TM_Renewal\bin\Ilhwa_TM_Renewal.pdb
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.MainForm.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormBarcodeList.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormBarcodePrinter.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormChainInputList.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FormConfig.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TasRegistPart.FormEquipChange.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Common.FormGridSelector.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Common.FormNumberPad.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormProgressBar.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormSearchOption.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Common.GridSelectorView.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.MsgBox.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FormTaskOrderList.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FormTaskRegist.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskOrderView.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FormTaskProcessList.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskOrderViewList.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskProcessViewList.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskProcessView.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TasRegistPart.BarcodePrinterViewPart.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FindMaterialsViewPart.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TasRegistPart.TaskMaterialsViewPart.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TasRegistPart.InputStatusListViewPart.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskOrderViewPart.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskProcessViewPart.resources
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Ilhwa_TM_Renewal.csproj.GenerateResource.Cache
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Ilhwa_TM_Renewal.exe
+D:\00work\Ilhwa_TM_Renewal\Ilhwa_TM_Renewal\obj\x86\Debug\Ilhwa_TM_Renewal.pdb
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\bin\Ilhwa_TM_Renewal.exe.config
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\bin\Ilhwa_TM_Renewal.exe
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\bin\Ilhwa_TM_Renewal.pdb
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.MainForm.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormBarcodeList.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormBarcodePrinter.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormChainInputList.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FormConfig.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TasRegistPart.FormEquipChange.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Common.FormGridSelector.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Common.FormNumberPad.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormProgressBar.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.FormSearchOption.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Common.GridSelectorView.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.Dialog.MsgBox.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FormTaskOrderList.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FormTaskRegist.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskOrderView.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FormTaskProcessList.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskOrderViewList.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskProcessViewList.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskProcessView.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TasRegistPart.BarcodePrinterViewPart.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.FindMaterialsViewPart.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TasRegistPart.TaskMaterialsViewPart.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TasRegistPart.InputStatusListViewPart.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskOrderViewPart.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Artn.Ilhwa.View.TaskProcessViewPart.resources
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Ilhwa_TM_Renewal.csproj.GenerateResource.Cache
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Ilhwa_TM_Renewal.exe
+D:\00work\Ilhwa_TM_Renewal shkang_131030_1747\Ilhwa_TM_Renewal\obj\x86\Debug\Ilhwa_TM_Renewal.pdb
